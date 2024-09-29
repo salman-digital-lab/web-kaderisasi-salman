@@ -63,7 +63,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
       );
     }
   } catch (error: unknown) {
-    if (typeof error === "string") return <ErrorWrapper message={error} />;
+    if (typeof error === "string" && error !== "Unauthorized")
+      return <ErrorWrapper message={error} />;
   }
 
   const isRegistered =
