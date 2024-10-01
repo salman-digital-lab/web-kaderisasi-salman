@@ -1,14 +1,8 @@
 "use client";
 
+import React from "react";
 import { ACTIVITY_CATEGORY_OPTIONS } from "@/constants/form/activity";
-import {
-  ActionIcon,
-  Chip,
-  ChipGroup,
-  Group,
-  rem,
-  TextInput,
-} from "@mantine/core";
+import { Chip, ChipGroup, Group, rem, TextInput } from "@mantine/core";
 import { useDebouncedCallback } from "@mantine/hooks";
 import { IconSearch } from "@tabler/icons-react";
 import { useRouter, useSearchParams } from "next/navigation";

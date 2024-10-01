@@ -5,13 +5,14 @@ import {
   PostRuangCurhatResp,
 } from "@/types/api/ruangcurhat";
 
-export const getActivities = async () => {
+export const getRuangCurhat = async (token: string) => {
   const response = await fetcher<GetRuangCurhatResp>(
     process.env.NEXT_PUBLIC_BE_API + "/ruang-curhat",
     {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
       },
       cache: "no-store",
     },

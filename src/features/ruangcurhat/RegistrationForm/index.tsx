@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Select, Textarea } from "@mantine/core";
+import { Button, Select, Textarea, TextInput } from "@mantine/core";
 
 import { useForm } from "@mantine/form";
 
@@ -9,6 +9,7 @@ import { useState } from "react";
 import { postRuangCurhat } from "@/services/ruangcurhat";
 import showNotif from "@/functions/common/notification";
 import { PROBLEM_OWNER_OPTIONS } from "@/constants/form/ruangcurhat";
+import { PROBLEM_OWNER_ENUM } from "@/constants/enum/ruangcurhat";
 
 type RegistrationFormProps = {
   token: string;
@@ -16,23 +17,29 @@ type RegistrationFormProps = {
 
 type RegistrationFormItems = {
   problem_owner: string;
-  category: string;
+  problem_category: string;
   problem_description: string;
-  handling_type: string;
-  preferred_conselor: string;
+  handling_technic: string;
+  counselor_gender: string;
 };
 
 export default function RegistrationForm({ token }: RegistrationFormProps) {
   const [loading, setLoading] = useState(false);
+  const [isFriend, setIsFriend] = useState(false);
 
   const form = useForm({
     initialValues: {
       problem_owner: "",
-      category: "",
+      owner_name: "",
+      problem_category: "",
       problem_description: "",
-      handling_type: "",
-      preferred_conselor: "",
+      handling_technic: "",
+      counselor_gender: "",
     },
+  });
+
+  form.watch("problem_owner", ({ value }) => {
+    setIsFriend(value === String(PROBLEM_OWNER_ENUM.TEMAN));
   });
 
   const handleRegistration = async (val: RegistrationFormItems) => {
@@ -62,14 +69,24 @@ export default function RegistrationForm({ token }: RegistrationFormProps) {
       <Select
         {...form.getInputProps("problem_owner")}
         key={form.key("problem_owner")}
-        label="Pemilik Masalah"
-        placeholder="Pilih Pemilik Masalah"
+        label="Kepemilikan Masalah"
+        placeholder="Pilih Kepemilikan Masalah"
         data={PROBLEM_OWNER_OPTIONS}
         required
       />
+      {isFriend && (
+        <TextInput
+          {...form.getInputProps("owner_name")}
+          key={form.key("owner_name")}
+          label="Nama Pemilik Masalah"
+          placeholder="Nama Pemilik Masalah"
+          required
+        />
+      )}
+
       <Select
-        {...form.getInputProps("category")}
-        key={form.key("category")}
+        {...form.getInputProps("problem_category")}
+        key={form.key("problem_category")}
         label="Kategori Masalah"
         placeholder="Pilih Kategori Masalah"
         data={[
@@ -90,16 +107,16 @@ export default function RegistrationForm({ token }: RegistrationFormProps) {
         required
       />
       <Select
-        {...form.getInputProps("handling_type")}
-        key={form.key("handling_type")}
+        {...form.getInputProps("handling_technic")}
+        key={form.key("handling_technic")}
         label="Teknik Penanganan"
         placeholder="Pilih Teknik Penanganan"
         data={["Online", "Langsung Bertemu"]}
         required
       />
       <Select
-        {...form.getInputProps("preferred_conselor")}
-        key={form.key("preferred_conselor")}
+        {...form.getInputProps("counselor_gender")}
+        key={form.key("counselor_gender")}
         label="Preferensi Konselor"
         placeholder="Pilih Preferensi Konselor"
         data={["Laki-Laki", "Perempuan"]}

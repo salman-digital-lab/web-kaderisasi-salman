@@ -1,27 +1,18 @@
-import {
-  Avatar,
-  Text,
-  Button,
-  Paper,
-  Container,
-  Flex,
-  Tabs,
-  TabsList,
-  TabsTab,
-  TabsPanel,
-} from "@mantine/core";
+import { Avatar, Text, Button, Paper, Container, Flex } from "@mantine/core";
 
-import PersonalDataForm from "@/features/profile/PersonalDataForm";
 import { getProfile, getProvinces, getUniversities } from "@/services/profile";
 
-import classes from "./index.module.css";
 import ErrorWrapper from "@/components/layout/Error";
 import { verifySession } from "@/functions/server/session";
 import { Profile, Province, University, User } from "@/types/data/user";
 import { USER_LEVEL_RENDER } from "@/constants/render/activity";
-import PersonalActivityData from "@/features/profile/PersonalActivityData";
 import { Activity, ActivityRegistration } from "@/types/data/activity";
 import { getActivitiesRegistration } from "@/services/activity";
+import { ProfileTab } from "@/features/profile/ProfileTab";
+
+import classes from "./index.module.css";
+import { RuangCurhatData } from "@/types/data/ruangcurhat";
+import { getRuangCurhat } from "@/services/ruangcurhat";
 
 export default async function Page() {
   let provinceData: Province[] | undefined;
@@ -37,6 +28,8 @@ export default async function Page() {
     | ({ activity: Activity } & ActivityRegistration)[]
     | undefined;
 
+  let ruangCurhatData: RuangCurhatData[] | undefined;
+
   const sessionData = await verifySession();
 
   try {
@@ -46,6 +39,7 @@ export default async function Page() {
     activitiesRegistration = await getActivitiesRegistration(
       sessionData.session || "",
     );
+    ruangCurhatData = await getRuangCurhat(sessionData.session || "");
   } catch (error: unknown) {
     if (typeof error === "string") return <ErrorWrapper message={error} />;
   }
@@ -62,32 +56,18 @@ export default async function Page() {
             <Text ta="center" c="dimmed" fz="sm">
               {profileData && USER_LEVEL_RENDER[profileData.profile.level]}
             </Text>
-
             <Button variant="default" c="red" fullWidth mt="md">
               Keluar
             </Button>
           </Paper>
 
-          <Tabs
-            variant="pills"
-            defaultValue="profiledata"
-            className={classes.tab}
-          >
-            <TabsList>
-              <TabsTab value="profiledata">Data Diri</TabsTab>
-              <TabsTab value="activity">Kegiatan</TabsTab>
-            </TabsList>
-            <TabsPanel value="profiledata" mt="md">
-              <PersonalDataForm
-                provinces={provinceData}
-                universities={universityData}
-                profileData={profileData}
-              />
-            </TabsPanel>
-            <TabsPanel value="activity" mt="md">
-              <PersonalActivityData activities={activitiesRegistration || []} />
-            </TabsPanel>
-          </Tabs>
+          <ProfileTab
+            profileData={profileData}
+            provinceData={provinceData}
+            universityData={universityData}
+            activitiesRegistration={activitiesRegistration}
+            ruangcurhatData={ruangCurhatData}
+          />
         </Flex>
       </Container>
     </main>
