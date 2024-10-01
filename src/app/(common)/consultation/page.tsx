@@ -1,29 +1,12 @@
-"use client";
-
 import Image from "next/image";
-import {
-  Button,
-  Container,
-  Select,
-  Text,
-  Textarea,
-  TextInput,
-  Title,
-} from "@mantine/core";
+import { Container, Text, Title } from "@mantine/core";
 import classes from "./index.module.css";
 import illustration from "@/assets/homepage-1.svg";
-import { hasLength, isEmail, useForm } from "@mantine/form";
+import RegistrationForm from "@/features/ruangcurhat/RegistrationForm";
+import { verifySession } from "@/functions/server/session";
 
-export default function Home() {
-  const form = useForm({
-    initialValues: {
-      problem_owner: "",
-      category: "",
-      problem_description: "",
-      handling_type: "",
-      preferred_conselor: "",
-    },
-  });
+export default async function Home() {
+  const sessionData = await verifySession();
 
   return (
     <main>
@@ -70,48 +53,7 @@ export default function Home() {
         </Text>
 
         <Container size="sm">
-          <form
-            className={classes.form}
-            onSubmit={form.onSubmit((val) => console.log(val))}
-          >
-            <Select
-              {...form.getInputProps("problem_owner")}
-              key={form.key("problem_owner")}
-              label="Pemilik Masalah"
-              placeholder="Pilih Pemilik Masalah"
-              data={["Diri Sendiri", "Teman"]}
-            />
-            <Select
-              {...form.getInputProps("category")}
-              key={form.key("category")}
-              label="Pemilik Masalah"
-              placeholder="Pilih Pemilik Masalah"
-              data={["Diri Sendiri", "Teman"]}
-            />
-            <Textarea
-              {...form.getInputProps("problem_description")}
-              key={form.key("problem_description")}
-              label="Deskripsi masalah yang akan didiskusikan"
-              placeholder="Ketikkan detil masalah anda"
-            />
-            <Select
-              {...form.getInputProps("handling_type")}
-              key={form.key("handling_type")}
-              label="Teknik Penanganan"
-              placeholder="Pilih Teknik Penanganan"
-              data={["Online", "Langsung Bertemu"]}
-            />
-            <Select
-              {...form.getInputProps("preferred_conselor")}
-              key={form.key("preferred_conselor")}
-              label="Preferensi Konselor"
-              placeholder="Pilih Preferensi Konselor"
-              data={["Laki-Laki", "Perempuan", "Keduanya"]}
-            />
-            <Button w="100%" type="submit" mt="md">
-              Kirim
-            </Button>
-          </form>
+          <RegistrationForm token={sessionData.session || ""} />
         </Container>
       </Container>
     </main>
