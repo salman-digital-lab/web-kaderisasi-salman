@@ -119,7 +119,7 @@ export default function RegistrationForm({ token }: RegistrationFormProps) {
         key={form.key("counselor_gender")}
         label="Preferensi Konselor"
         placeholder="Pilih Preferensi Konselor"
-        data={["Laki-Laki", "Perempuan"]}
+        data={["Laki-laki", "Perempuan"]}
         required
       />
       <Button
