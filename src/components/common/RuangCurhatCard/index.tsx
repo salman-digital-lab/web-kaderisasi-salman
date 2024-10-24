@@ -1,4 +1,15 @@
-import { Badge, Card, Group, Title, Accordion, rem } from "@mantine/core";
+import {
+  Badge,
+  Card,
+  Group,
+  Title,
+  Accordion,
+  Text,
+  rem,
+  Avatar,
+  Stack,
+  Paper,
+} from "@mantine/core";
 import { IconCalendarTime } from "@tabler/icons-react";
 
 import {
@@ -63,7 +74,36 @@ export default function RuangCurhatCard({ data }: RuangCurhatCardProps) {
             <Accordion.Control>
               <Title order={5}>Konselor</Title>
             </Accordion.Control>
-            <Accordion.Panel>{data.counselor_gender}</Accordion.Panel>
+            {data.adminUser ? (
+              <>
+                <Accordion.Panel>
+                  <Stack>
+                    <Text size="sm">
+                      Konselor berikut telah ditugaskan untuk membantu mu.
+                    </Text>
+                    <Paper shadow="xs" p="sm">
+                      <Group>
+                        <Avatar radius="xl" />
+                        <div>
+                          <Text size="sm" fw={500}>
+                            {data.adminUser?.display_name}
+                          </Text>
+                          <Text c="dimmed" size="xs">
+                            {data.adminUser?.email}
+                          </Text>
+                        </div>
+                      </Group>
+                    </Paper>
+                  </Stack>
+                </Accordion.Panel>
+              </>
+            ) : (
+              <>
+                <Accordion.Panel>
+                  <Text size="sm">Belum ada konselor yang ditugaskan</Text>
+                </Accordion.Panel>
+              </>
+            )}
           </Accordion.Item>
           <Accordion.Item key="description" value="description">
             <Accordion.Control>
