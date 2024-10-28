@@ -21,11 +21,11 @@ import {
 } from "@/constants/render/activity";
 import { verifySession } from "@/functions/server/session";
 import { getActivity, getActivityRegistration } from "@/services/activity";
-import { ACTIVITY_REGISTRATION_DEFAULT_ENUM } from "@/constants/enum/activity";
 import { getProfile } from "@/services/profile";
 import ErrorWrapper from "@/components/layout/Error";
-import { Profile, User } from "@/types/data/user";
-import { Activity } from "@/types/data/activity";
+import { Activity } from "@/types/model/activity";
+import { Member, PublicUser } from "@/types/model/members";
+import { ACTIVITY_REGISTRANT_STATUS_ENUM } from "@/types/constants/activity";
 
 const calendarIcon = (
   <IconCalendarTime style={{ width: rem(12), height: rem(12) }} />
@@ -44,8 +44,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   let profileData:
     | {
-        userData: User;
-        profile: Profile;
+        userData: PublicUser;
+        profile: Member;
       }
     | undefined;
 
@@ -70,7 +70,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const isRegistered =
     !!activityRegistration?.status &&
     activityRegistration?.status !==
-      ACTIVITY_REGISTRATION_DEFAULT_ENUM.BELUM_TERDAFTAR;
+      ACTIVITY_REGISTRANT_STATUS_ENUM.BELUM_TERDAFTAR;
 
   const isLevelEligible = Boolean(
     activity &&

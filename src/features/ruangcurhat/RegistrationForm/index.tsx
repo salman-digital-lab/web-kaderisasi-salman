@@ -9,7 +9,7 @@ import { useState } from "react";
 import { postRuangCurhat } from "@/services/ruangcurhat";
 import showNotif from "@/functions/common/notification";
 import { PROBLEM_OWNER_OPTIONS } from "@/constants/form/ruangcurhat";
-import { PROBLEM_OWNER_ENUM } from "@/constants/enum/ruangcurhat";
+import { PROBLEM_OWNER_ENUM } from "@/types/constants/ruangcurhat";
 
 type RegistrationFormProps = {
   token: string;

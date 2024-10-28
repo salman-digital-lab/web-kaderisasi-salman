@@ -2,7 +2,7 @@
 
 import showNotif from "@/functions/common/notification";
 import { postActivity } from "@/services/activity";
-import { QuestionnaireSchema } from "@/types/data/activity";
+import { Questionnaire } from "@/types/model/activity";
 import {
   Button,
   Group,
@@ -19,12 +19,12 @@ import { useState } from "react";
 
 type ActivityFormProps = {
   token: string;
-  formSchemas: QuestionnaireSchema[];
+  formSchemas: Questionnaire[];
   slug: string;
 };
 
 const renderForm = (
-  schema: QuestionnaireSchema,
+  schema: Questionnaire,
   form: UseFormReturnType<Record<string, unknown>>,
 ) => {
   switch (schema.type) {

@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { Card, Image, Text, Group, Badge, Button, rem } from "@mantine/core";
 import classes from "./index.module.css";
-import { USER_LEVEL_ENUM } from "@/constants/enum/activity";
 import { USER_LEVEL_RENDER } from "@/constants/render/activity";
 import { IconCalendarTime } from "@tabler/icons-react";
+import { USER_LEVEL_ENUM } from "@/types/constants/profile";
 
 type ActivityCardProps = {
   activityName: string;

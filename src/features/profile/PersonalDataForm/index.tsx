@@ -3,7 +3,9 @@
 import { GENDER_OPTION } from "@/constants/form/profile";
 import showNotif from "@/functions/common/notification";
 import editProfile from "@/functions/server/editProfile";
-import { Profile, Province, University, User } from "@/types/data/user";
+import { Member, PublicUser } from "@/types/model/members";
+import { Province } from "@/types/model/province";
+import { University } from "@/types/model/university";
 import { Button, Fieldset, Paper, Select, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
@@ -11,8 +13,8 @@ type PersonalDataFormProps = {
   provinces?: Province[];
   universities?: University[];
   profileData?: {
-    userData: User;
-    profile: Profile;
+    userData: PublicUser;
+    profile: Member;
   };
 };
 
@@ -28,13 +30,13 @@ export default function PersonalDataForm({
       gender: profileData?.profile.gender,
       email: profileData?.userData.email,
       personal_id: profileData?.profile.personal_id,
-      province_id: profileData?.profile.province_id.toString(),
+      province_id: profileData?.profile.province_id?.toString(),
       line: profileData?.profile.line,
       instagram: profileData?.profile.instagram,
       tiktok: profileData?.profile.tiktok,
       linkedin: profileData?.profile.linkedin,
       whatsapp: profileData?.profile.whatsapp,
-      university_id: profileData?.profile.university_id.toString(),
+      university_id: profileData?.profile.university_id?.toString(),
       major: profileData?.profile.major,
       intake_year: profileData?.profile.intake_year,
     },
@@ -42,7 +44,7 @@ export default function PersonalDataForm({
 
   const handleEditProfile = async (
     rawFormData: Partial<
-      Omit<Profile, "province_id" | "university_id"> & {
+      Omit<Member, "province_id" | "university_id"> & {
         province_id: string;
         university_id: string;
       }

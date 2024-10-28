@@ -4,28 +4,31 @@ import { getProfile, getProvinces, getUniversities } from "@/services/profile";
 
 import ErrorWrapper from "@/components/layout/Error";
 import { verifySession } from "@/functions/server/session";
-import { Profile, Province, University, User } from "@/types/data/user";
 import { USER_LEVEL_RENDER } from "@/constants/render/activity";
-import { Activity, ActivityRegistration } from "@/types/data/activity";
 import { getActivitiesRegistration } from "@/services/activity";
 import { ProfileTab } from "@/features/profile/ProfileTab";
 
 import classes from "./index.module.css";
-import { RuangCurhatData } from "@/types/data/ruangcurhat";
 import { getRuangCurhat } from "@/services/ruangcurhat";
+import { Activity, Registrant } from "@/types/model/activity";
+import { Province } from "@/types/model/province";
+import { RuangCurhatData } from "@/types/model/ruangcurhat";
+import { University } from "@/types/model/university";
+import { Member, PublicUser } from "@/types/model/members";
+import { USER_LEVEL_ENUM } from "@/types/constants/profile";
 
 export default async function Page() {
   let provinceData: Province[] | undefined;
   let universityData: University[] | undefined;
   let profileData:
     | {
-        userData: User;
-        profile: Profile;
+        userData: PublicUser;
+        profile: Member;
       }
     | undefined;
 
   let activitiesRegistration:
-    | ({ activity: Activity } & ActivityRegistration)[]
+    | ({ activity: Activity } & Registrant)[]
     | undefined;
 
   let ruangCurhatData: RuangCurhatData[] | undefined;
@@ -54,7 +57,10 @@ export default async function Page() {
               {profileData?.profile.name}
             </Text>
             <Text ta="center" c="dimmed" fz="sm">
-              {profileData && USER_LEVEL_RENDER[profileData.profile.level]}
+              {profileData &&
+                USER_LEVEL_RENDER[
+                  profileData.profile.level || USER_LEVEL_ENUM.JAMAAH
+                ]}
             </Text>
             <Button variant="default" c="red" fullWidth mt="md">
               Keluar

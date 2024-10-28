@@ -1,7 +1,7 @@
 "use client";
 
 import RuangCurhatCard from "@/components/common/RuangCurhatCard";
-import { RuangCurhatData } from "@/types/data/ruangcurhat";
+import { RuangCurhatData } from "@/types/model/ruangcurhat";
 import { Flex, Paper } from "@mantine/core";
 
 type PersonalActivityDataProps = {

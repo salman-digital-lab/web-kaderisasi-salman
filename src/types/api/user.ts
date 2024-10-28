@@ -1,12 +1,17 @@
-import { Profile, Province, University, User } from "../data/user";
 import { APIPagiResponse, APIResponse } from "../helper";
+import { Member, PublicUser } from "../model/members";
+import { Province } from "../model/province";
+import { University } from "../model/university";
 
 export type GetProvincesResp = APIResponse<Province[]>;
 
 export type GetUniversitiesResp = APIPagiResponse<University>;
 
-export type GetProfileResp = APIResponse<{ userData: User; profile: Profile }>;
+export type GetProfileResp = APIResponse<{
+  userData: PublicUser;
+  profile: Member;
+}>;
 
-export type PutProfileReq = Partial<Profile>;
+export type PutProfileReq = Partial<Member>;
 
-export type PutProfileResp = APIResponse<Profile>;
+export type PutProfileResp = APIResponse<Member>;

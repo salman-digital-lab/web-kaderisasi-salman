@@ -1,5 +1,5 @@
-import { RuangCurhatData } from "../data/ruangcurhat";
 import { APIResponse } from "../helper";
+import { RuangCurhatData } from "../model/ruangcurhat";
 
 export type PostRuangCurhatReq = Partial<RuangCurhatData>;
 

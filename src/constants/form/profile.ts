@@ -1,10 +1,12 @@
+import { GENDER } from "@/types/constants/profile";
+
 export const GENDER_OPTION = [
   {
     label: "Laki-Laki",
-    value: "M",
+    value: GENDER.Male,
   },
   {
     label: "Perempuan",
-    value: "F",
+    value: GENDER.Female,
   },
 ];

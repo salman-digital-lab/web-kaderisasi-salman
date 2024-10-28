@@ -44,7 +44,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <ActivityForm
           token={sessionData.session || ""}
           slug={params.slug}
-          formSchemas={activity?.additional_config?.additional_questionnaire}
+          formSchemas={
+            activity?.additional_config?.additional_questionnaire || []
+          }
         />
       </Paper>
     </Container>

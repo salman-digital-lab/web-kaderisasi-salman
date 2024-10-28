@@ -1,7 +1,7 @@
 "use client";
 
 import ActivityPersonalCard from "@/components/common/ActivityPersonalCard";
-import { Activity, ActivityRegistration } from "@/types/data/activity";
+import { Activity, Registrant } from "@/types/model/activity";
 import {
   Center,
   Input,
@@ -13,7 +13,7 @@ import {
 import { useState } from "react";
 
 type PersonalActivityDataProps = {
-  activities: ({ activity: Activity } & ActivityRegistration)[];
+  activities: ({ activity: Activity } & Registrant)[];
 };
 
 export default function PersonalActivityData({

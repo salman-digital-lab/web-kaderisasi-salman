@@ -5,24 +5,24 @@ import PersonalDataForm from "../PersonalDataForm";
 import PersonalActivityData from "../PersonalActivityData";
 
 import classes from "./index.module.css";
-import { Profile, Province, University, User } from "@/types/data/user";
-import { Activity, ActivityRegistration } from "@/types/data/activity";
 import { useRouter, useSearchParams } from "next/navigation";
 import RuangCurhatList from "../RuangCurhatList";
-import { RuangCurhatData } from "@/types/data/ruangcurhat";
+import { Activity, Registrant } from "@/types/model/activity";
+import { Province } from "@/types/model/province";
+import { RuangCurhatData } from "@/types/model/ruangcurhat";
+import { University } from "@/types/model/university";
+import { Member, PublicUser } from "@/types/model/members";
 
 type ProfileTabProps = {
   provinceData: Province[] | undefined;
   universityData: University[] | undefined;
   profileData:
     | {
-        userData: User;
-        profile: Profile;
+        userData: PublicUser;
+        profile: Member;
       }
     | undefined;
-  activitiesRegistration:
-    | ({ activity: Activity } & ActivityRegistration)[]
-    | undefined;
+  activitiesRegistration: ({ activity: Activity } & Registrant)[] | undefined;
   ruangcurhatData: RuangCurhatData[] | undefined;
 };
 

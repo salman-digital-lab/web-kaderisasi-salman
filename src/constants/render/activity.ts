@@ -1,4 +1,5 @@
-import { ACTIVITY_CATEGORY_ENUM, USER_LEVEL_ENUM } from "../enum/activity";
+import { ACTIVITY_CATEGORY_ENUM } from "@/types/constants/activity";
+import { USER_LEVEL_ENUM } from "@/types/constants/profile";
 
 export const ACTIVITY_CATEGORY_RENDER = {
   [ACTIVITY_CATEGORY_ENUM.PELATIHAN]: "Pelatihan",

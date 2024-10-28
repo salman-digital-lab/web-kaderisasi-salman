@@ -3,7 +3,9 @@ import ProfileForm from "@/features/activity/ProfileForm";
 import { verifySession } from "@/functions/server/session";
 import { getActivity } from "@/services/activity";
 import { getProfile, getProvinces, getUniversities } from "@/services/profile";
-import { Profile, Province, University, User } from "@/types/data/user";
+import { Member, PublicUser } from "@/types/model/members";
+import { Province } from "@/types/model/province";
+import { University } from "@/types/model/university";
 import {
   Container,
   Paper,
@@ -20,8 +22,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
   let universityData: University[] | undefined;
   let profileData:
     | {
-        userData: User;
-        profile: Profile;
+        userData: PublicUser;
+        profile: Member;
       }
     | undefined;
 
@@ -66,7 +68,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           universities={universityData}
           profileData={profileData}
           mandatoryProfileData={
-            activity.additional_config.mandatory_profile_data
+            activity.additional_config.mandatory_profile_data || []
           }
           slug={params.slug}
         />

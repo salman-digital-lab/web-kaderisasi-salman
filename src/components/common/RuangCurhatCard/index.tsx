@@ -13,15 +13,15 @@ import {
 import { IconCalendarTime } from "@tabler/icons-react";
 
 import {
-  PROBLEM_OWNER_ENUM,
-  PROBLEM_STATUS_ENUM,
-} from "@/constants/enum/ruangcurhat";
-import {
   PROBLEM_OWNER_RENDER,
   PROBLEM_STATUS_RENDER,
   PROBLEM_STATUS_RENDER_COLOR,
 } from "@/constants/render/ruangcurhat";
-import { RuangCurhatData } from "@/types/data/ruangcurhat";
+import {
+  PROBLEM_OWNER_ENUM,
+  PROBLEM_STATUS_ENUM,
+} from "@/types/constants/ruangcurhat";
+import { RuangCurhatData } from "@/types/model/ruangcurhat";
 
 type RuangCurhatCardProps = {
   data: RuangCurhatData;
@@ -36,15 +36,9 @@ export default function RuangCurhatCard({ data }: RuangCurhatCardProps) {
     <Card withBorder radius="md">
       <Card.Section withBorder inheritPadding py="xs">
         <Group justify="space-between">
-          <Title order={4}>
-            {PROBLEM_OWNER_RENDER[data.problem_owner as PROBLEM_OWNER_ENUM]}
-          </Title>
-          <Badge
-            color={
-              PROBLEM_STATUS_RENDER_COLOR[data.status as PROBLEM_STATUS_ENUM]
-            }
-          >
-            {PROBLEM_STATUS_RENDER[data.status as PROBLEM_STATUS_ENUM]}
+          <Title order={4}>{PROBLEM_OWNER_RENDER[data.problem_owner]}</Title>
+          <Badge color={PROBLEM_STATUS_RENDER_COLOR[data.status]}>
+            {PROBLEM_STATUS_RENDER[data.status]}
           </Badge>
         </Group>
         <Group gap={7} mt={5}>
