@@ -9,6 +9,8 @@ import {
   GetActivityResp,
   PostActivityReq,
   PostActivityResp,
+  PutActivityReq,
+  PutActivityResp,
 } from "@/types/api/activity";
 
 export const getActivities = async (props: GetActivitiesReq) => {
@@ -83,6 +85,25 @@ export const postActivity = async (token: string, props: PostActivityReq) => {
     process.env.NEXT_PUBLIC_BE_API + "/activities/" + props.slug + "/register",
     {
       method: "POST",
+      body: JSON.stringify(props.data),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    },
+  );
+
+  return response;
+};
+
+export const putActivity = async (token: string, props: PutActivityReq) => {
+  const response = await fetcher<PutActivityResp>(
+    process.env.NEXT_PUBLIC_BE_API +
+      "/activities/" +
+      props.slug +
+      "/registration",
+    {
+      method: "PUT",
       body: JSON.stringify(props.data),
       headers: {
         "Content-Type": "application/json",

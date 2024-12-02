@@ -31,3 +31,10 @@ export type GetActivityRegistrationResp = APIResponse<{ status: string }>;
 export type GetActivitiesRegistrationResp = APIResponse<
   ({ activity: Activity } & Registrant)[]
 >;
+
+export type PutActivityReq = {
+  slug: string;
+  data: { questionnaire_answer: Record<string, string> };
+};
+
+export type PutActivityResp = APIResponse<Registrant>;
